@@ -1,0 +1,203 @@
+﻿/* ==========================================================================
+   CASA MIA Coffee & Brunch — Sistema de diseño base
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Jost:wght@300;400;500;600&display=swap');
+
+:root{
+  /* Paleta — extraída del branding real: taupe/latte, madera nogal, crema, verde matcha */
+  --cm-cream: #F7F1E6;
+  --cm-cream-soft: #FBF7F0;
+  --cm-latte: #C9A67C;
+  --cm-latte-soft: #E4D2B4;
+  --cm-walnut: #4A3324;
+  --cm-walnut-dark: #2E1D13;
+  --cm-espresso: #1E1712;
+  --cm-sage: #7C8A63;
+  --cm-sage-dark: #5C6B47;
+  --cm-terracotta: #A9573C;
+  --cm-ink: #26201A;
+  --cm-line: rgba(38, 32, 26, 0.14);
+  --cm-line-soft: rgba(247, 241, 230, 0.22);
+
+  --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+
+  --container-max: 1240px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+
+  --ease-out: cubic-bezier(.16,.8,.34,1);
+  --dur-1: .5s;
+  --dur-2: .9s;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{
+  scroll-behavior: smooth;
+}
+
+body{
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--cm-ink);
+  background: var(--cm-cream-soft);
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img{ max-width: 100%; display: block; }
+
+a{ color: inherit; text-decoration: none; }
+
+ul{ margin: 0; padding: 0; list-style: none; }
+
+h1, h2, h3, h4{
+  font-family: var(--font-display);
+  font-weight: 400;
+  margin: 0;
+  color: var(--cm-walnut-dark);
+  letter-spacing: -0.01em;
+}
+
+p{ margin: 0; }
+
+.container{
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.eyebrow{
+  display: inline-flex;
+  align-items: center;
+  gap: .6em;
+  font-family: var(--font-body);
+  font-size: .8rem;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--cm-sage-dark);
+  font-weight: 500;
+}
+
+.eyebrow::before{
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  display: inline-block;
+}
+
+.section-title{
+  font-size: clamp(2.15rem, 4.4vw, 3.4rem);
+  line-height: 1.08;
+}
+
+.section-title em{
+  font-style: italic;
+  color: var(--cm-terracotta);
+}
+
+.lede{
+  font-size: 1.15rem;
+  color: rgba(38,32,26,.72);
+  max-width: 46ch;
+  font-weight: 300;
+}
+
+/* Botones */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: var(--font-body);
+  font-size: .9rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: .95rem 1.9rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform var(--dur-1) var(--ease-out), background var(--dur-1) var(--ease-out), color var(--dur-1) var(--ease-out), border-color var(--dur-1) var(--ease-out);
+  white-space: nowrap;
+}
+
+.btn-primary{
+  background: var(--cm-walnut-dark);
+  color: var(--cm-cream-soft);
+  border-color: var(--cm-walnut-dark);
+}
+.btn-primary:hover{ background: var(--cm-terracotta); border-color: var(--cm-terracotta); transform: translateY(-2px); }
+
+.btn-outline{
+  background: transparent;
+  color: var(--cm-walnut-dark);
+  border-color: var(--cm-walnut-dark);
+}
+.btn-outline:hover{ background: var(--cm-walnut-dark); color: var(--cm-cream-soft); transform: translateY(-2px); }
+
+.btn-ghost-light{
+  background: transparent;
+  color: var(--cm-cream-soft);
+  border-color: rgba(247,241,230,.55);
+}
+.btn-ghost-light:hover{ background: var(--cm-cream-soft); color: var(--cm-walnut-dark); border-color: var(--cm-cream-soft); }
+
+.btn svg{ width: 14px; height: 14px; transition: transform var(--dur-1) var(--ease-out); }
+.btn:hover svg{ transform: translateX(3px); }
+
+/* Reveal-on-scroll */
+[data-reveal]{
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
+}
+[data-reveal].is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+[data-reveal="fade"]{ transform: none; }
+[data-reveal-delay="1"]{ transition-delay: .1s; }
+[data-reveal-delay="2"]{ transition-delay: .22s; }
+[data-reveal-delay="3"]{ transition-delay: .34s; }
+[data-reveal-delay="4"]{ transition-delay: .46s; }
+
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{ opacity: 1; transform: none; transition: none; }
+  html{ scroll-behavior: auto; }
+}
+
+/* Mascota SVG — trazo lineal (íconos funcionales: pin, reloj, cámara, checks) */
+.mascot-mark{ width: 40px; height: 40px; }
+.mascot-mark path, .mascot-mark circle{
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Logotipo real (repartidor + croissant), usado en header/footer/hero-badge */
+.brand-mark{ width: 40px; height: 40px; object-fit: contain; display: block; }
+
+/* Divisor de arco — motivo tomado de la arquitectura interior real */
+.arch-frame{
+  position: relative;
+  overflow: hidden;
+  border-radius: 260px 260px 14px 14px;
+}
+.arch-frame img{
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+hr.thin{
+  border: none;
+  border-top: 1px solid var(--cm-line);
+  margin: 0;
+}
+
+::selection{ background: var(--cm-terracotta); color: var(--cm-cream-soft); }
